@@ -14,7 +14,8 @@
     "@oclif/plugin-help": "^6",
     "@oclif/plugin-version": "^2.2.10",
     "execa": "^9.3.1",
-    "nanospinner": "^1.1.0"
+    "nanospinner": "^1.1.0",
+    "ora": "^8.1.0"
   },
   "devDependencies": {
     "@oclif/prettier-config": "^0.2.1",
