@@ -2,14 +2,14 @@ import { input } from '@inquirer/prompts';
 import { Args, Command, Flags } from '@oclif/core';
 import { execa } from 'execa';
 import { createSpinner } from 'nanospinner';
-import { readdirSync } from 'node:fs';
+import { mkdirSync, readdirSync } from 'node:fs';
 import { access, constants } from 'node:fs/promises';
 import path from 'node:path';
 
 
 
 const templateRepo = 'Stradivary/angular-boilerplate';
-
+const mainBranchName = 'main';
 export default class Init extends Command {
 
   static override args = {
@@ -24,8 +24,9 @@ export default class Init extends Command {
 
   static override flags = {
     force: Flags.boolean({ char: 'f' }),
+    intractive: Flags.boolean({ char: 'i', description: "interactive mode" }),
     git: Flags.boolean({ char: 'g', description: 'Initialize a git repository' }),
-    install: Flags.boolean({ char: 'i', description: 'Install dependencies' }),
+    npm: Flags.boolean({ char: 'p', description: 'Install dependencies' }),
     name: Flags.string({ char: 'n', description: 'Project Name' }),
     version: Flags.string({ char: 'v', description: 'Version of the template' }),
   };
@@ -52,10 +53,13 @@ export default class Init extends Command {
     await this.logFinishMessage(targetDir);
   }
 
-  private async checkIfDirectoryNotEmpty(targetDir: string, flags: Record<string, string>) {
+
+  private async checkIfDirectoryNotEmpty(targetDir: string, flags: Record<string, any>) {
     try {
-      // eslint-disable-next-line no-bitwise
-      await access(targetDir, constants.R_OK | constants.W_OK);
+      // Check if the directory exists
+      await access(targetDir, constants.F_OK);
+
+      // If it exists, check if it's empty
       const files = readdirSync(targetDir);
       if (files.length > 0 && !flags.force) {
         this.log(`ℹ️ The directory ${targetDir} is not empty. Please use --force to overwrite the contents.`);
@@ -65,9 +69,19 @@ export default class Init extends Command {
       if (flags.force) {
         this.log(`ℹ️ Overwriting the contents of ${targetDir}`);
       }
-
-    } catch {
-      this.error(`❌ The directory ${targetDir} is not accessible`);
+    } catch (error) {
+      // If the directory doesn't exist, create it
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
+        try {
+          mkdirSync(targetDir, { recursive: true });
+          this.log(`ℹ️ Created directory ${targetDir}`);
+        } catch (mkdirError) {
+          this.error(`❌ Failed to create directory ${targetDir}: ${mkdirError}`);
+        }
+      } else {
+        // If there's any other error, report it
+        this.error(`❌ Error accessing directory ${targetDir}: ${error}`);
+      }
     }
   }
 
@@ -85,7 +99,7 @@ export default class Init extends Command {
     const spinner = createSpinner();
     spinner.start();
 
-    await execa('npx', ['tiged', `${templateRepo}#${flags.version ?? 'master'}`, targetDir, flags.force ? '--force' : ''], {
+    await execa('npx', ['tiged', `${templateRepo}#${flags.version ?? mainBranchName}`, targetDir, flags.force ? '--force' : ''], {
       stderr: 'inherit', stdout: 'inherit'
     });
 
