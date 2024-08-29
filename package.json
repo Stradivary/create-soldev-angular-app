@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "author": "stradivary",
   "bin": {
+    "soldev-ng": "./bin/run.js",
     "create-soldev-angular-app": "./bin/run.js"
   },
   "bugs": "https://github.com/Stradivary/create-soldev-angular-app/issues",
@@ -60,6 +61,8 @@
   "scripts": {
     "build": "shx rm -rf dist && tsc -b",
     "lint": "eslint . --ext .ts",
+    "dev": "node ./bin/dev",
+    "start": "node ./bin/run",
     "postpack": "shx rm -f oclif.manifest.json",
     "posttest": "pnpm run lint",
     "prepack": "oclif manifest && oclif readme",
