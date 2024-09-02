@@ -10,6 +10,7 @@ import path from 'node:path';
 
 const templateRepo = 'Stradivary/angular-boilerplate';
 const mainBranchName = 'main';
+
 export default class Init extends Command {
 
   static override args = {
