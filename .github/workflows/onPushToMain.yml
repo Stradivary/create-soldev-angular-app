@@ -47,26 +47,18 @@ jobs:
       #       git commit -am "chore: update README.md"
       #       git push -u origin ${{ github.ref_name }}
       #     fi
-      - name: Release Action 
-        uses: plutotcool/release@v2.0.0
-        with:
-          # GitHub Token used to create the release on GitHub and publish on GitHub registry.
-          github_token: ${{ secrets.GITHUB_TOKEN }} 
-          # Enable or disable publishing to package registries. When set to false, releases are only created on GitHub.
-          publish: false
-          # Enable or disable pushing changes made by the action.
-          push: true
-          # User name to use when pushing to GitHub.
-          name: ${{ secrets.GH_USERNAME }} # optional, default is github-actions[bot]
-          # Email to use when pushing to GitHub.
-          email: ${{ secrets.GH_EMAIL }} # optional, default is github-actions[bot]@users.noreply.github.com
-          
-      # - name: Create Github Release
-      #   uses: ncipollo/release-action@2c591bcc8ecdcd2db72b97d6147f871fcd833ba5
-      #   if: ${{ steps.version-check.outputs.skipped == 'false' }}
+      # - name: Release Action 
+      #   uses: plutotcool/release@v2.0.0
       #   with:
-      #     name: ${{ steps.version-check.outputs.tag }}
-      #     tag: ${{ steps.version-check.outputs.tag }}
-      #     commit: ${{ github.ref_name }}
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     skipIfReleaseExists: true
+      #     # GitHub Token used to create the release on GitHub and publish on GitHub registry.
+      #     github_token: ${{ secrets.GITHUB_TOKEN }} 
+      #     # Enable or disable publishing to package registries. When set to false, releases are only created on GitHub.
+      #     publish: false
+      #     # Enable or disable pushing changes made by the action.
+      #     push: true
+      #     # User name to use when pushing to GitHub.
+      #     name: ${{ secrets.GH_USERNAME }} # optional, default is github-actions[bot]
+      #     # Email to use when pushing to GitHub.
+      #     email: ${{ secrets.GH_EMAIL }} # optional, default is github-actions[bot]@users.noreply.github.com
+          
+ 

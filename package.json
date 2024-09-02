@@ -1,10 +1,9 @@
 {
   "name": "create-soldev-angular-app",
   "description": "Codebase builder for telkomsel angular app",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "stradivary",
   "bin": {
-    "create-soldev-ng": "./bin/run.js",
     "create-soldev-angular-app": "./bin/run.js"
   },
   "bugs": "https://github.com/Stradivary/create-soldev-angular-app/issues",
@@ -51,10 +50,6 @@
   "type": "module",
   "oclif": {
     "bin": "create-soldev-angular-app",
-    "binAliases": [
-      "create-soldev-angular-app",
-      "create-soldev-ng"
-    ],
     "dirname": "create-soldev-angular-app",
     "commands": "./dist/commands",
     "plugins": [
