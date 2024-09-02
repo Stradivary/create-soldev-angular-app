@@ -13,7 +13,7 @@ jobs:
         with:
           node-version: latest
       - run: npm install
-      - run: npm run prepack
+      - run: npm run build
       - uses: JS-DevTools/npm-publish@v3.1.1
         with:
           token: ${{ secrets.NPM_TOKEN }}
