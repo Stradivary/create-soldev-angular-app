@@ -11,6 +11,7 @@
     "@inquirer/prompts": "^5.3.8",
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
+    "@oclif/plugin-update": "^4.5.5",
     "@oclif/plugin-version": "^2.2.10",
     "execa": "^9.3.1",
     "nanospinner": "^1.1.0",
@@ -30,7 +31,7 @@
     "mocha": "^10",
     "oclif": "^4",
     "shx": "^0.3.3",
-    "ts-node": "^10",
+    "tsx": "^4.19.0",
     "typescript": "^5"
   },
   "engines": {
@@ -56,8 +57,7 @@
       "target": "./dist/commands"
     },
     "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-version"
+      "@oclif/plugin-*"
     ]
   },
   "repository": "Stradivary/create-soldev-angular-app",
