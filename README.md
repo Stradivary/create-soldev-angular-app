@@ -20,7 +20,7 @@ $ npm install -g create-soldev-angular-app
 $ create-soldev-angular-app COMMAND
 running command...
 $ create-soldev-angular-app (--version)
-create-soldev-angular-app/0.1.8 linux-x64 node-v20.16.0
+create-soldev-angular-app/0.1.9 linux-x64 node-v20.16.0
 $ create-soldev-angular-app --help [COMMAND]
 USAGE
   $ create-soldev-angular-app COMMAND
@@ -32,7 +32,6 @@ USAGE
 * [`create-soldev-angular-app help [COMMAND]`](#create-soldev-angular-app-help-command)
 * [`create-soldev-angular-app init [NAME] [DIRECTORY]`](#create-soldev-angular-app-init-name-directory)
 * [`create-soldev-angular-app list`](#create-soldev-angular-app-list)
-* [`create-soldev-angular-app update [CHANNEL]`](#create-soldev-angular-app-update-channel)
 * [`create-soldev-angular-app version`](#create-soldev-angular-app-version)
 
 ## `create-soldev-angular-app help [COMMAND]`
@@ -81,7 +80,7 @@ EXAMPLES
   $ create-soldev-angular-app init my-project
 ```
 
-_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.8/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.9/src/commands/init.ts)_
 
 ## `create-soldev-angular-app list`
 
@@ -98,44 +97,7 @@ EXAMPLES
   $ create-soldev-angular-app list
 ```
 
-_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.8/src/commands/list.ts)_
-
-## `create-soldev-angular-app update [CHANNEL]`
-
-update the create-soldev-angular-app CLI
-
-```
-USAGE
-  $ create-soldev-angular-app update [CHANNEL] [--force |  | [-a | -v <value> | -i]]
-
-FLAGS
-  -a, --available        See available versions.
-  -i, --interactive      Interactively select version to install. This is ignored if a channel is provided.
-  -v, --version=<value>  Install a specific version.
-      --force            Force a re-download of the requested version.
-
-DESCRIPTION
-  update the create-soldev-angular-app CLI
-
-EXAMPLES
-  Update to the stable channel:
-
-    $ create-soldev-angular-app update stable
-
-  Update to a specific version:
-
-    $ create-soldev-angular-app update --version 1.0.0
-
-  Interactively select version:
-
-    $ create-soldev-angular-app update --interactive
-
-  See available versions:
-
-    $ create-soldev-angular-app update --available
-```
-
-_See code: [@oclif/plugin-update](https://github.com/oclif/plugin-update/blob/v4.5.5/src/commands/update.ts)_
+_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.9/src/commands/list.ts)_
 
 ## `create-soldev-angular-app version`
 
