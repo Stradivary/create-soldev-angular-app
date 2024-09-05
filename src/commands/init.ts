@@ -14,7 +14,8 @@ const mainBranchName = 'main';
 export default class Init extends Command {
 
   static override args = {
-    directory: Args.string({ default: '.', description: 'directory to create the project in' }),
+    name: Args.string({ description: 'Name of the project', required: false }),
+    directory: Args.string({ default: '.', description: 'directory to create the project in', required: false }),
   };
 
   static override description = 'initialize a new project';
@@ -28,20 +29,19 @@ export default class Init extends Command {
     interactive: Flags.boolean({ char: 'i', description: "interactive mode" }),
     git: Flags.boolean({ char: 'g', description: 'Initialize a git repository' }),
     npm: Flags.boolean({ char: 'p', description: 'Install dependencies' }),
-    name: Flags.string({ char: 'n', description: 'Project Name' }),
     version: Flags.string({ char: 'v', description: 'Version of the template' }),
   };
 
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(Init);
 
-    const name = flags.name ?? await input({
+    const name = args.name ?? await input({
       message: 'Enter the project name',
     });
 
     const targetDir = path.join(args.directory, name);
 
-    this.log(`ℹ️ creating new project in ${targetDir}`);
+    this.log(`> creating new project in ${targetDir}`);
 
     await this.checkIfDirectoryNotEmpty(targetDir, flags);
 
@@ -63,19 +63,19 @@ export default class Init extends Command {
       // If it exists, check if it's empty
       const files = readdirSync(targetDir);
       if (files.length > 0 && !flags.force) {
-        this.log(`ℹ️ The directory ${targetDir} is not empty. Please use --force to overwrite the contents.`);
+        this.log(`> The directory ${targetDir} is not empty. Please use --force to overwrite the contents.`);
         this.exit(1);
       }
 
       if (flags.force) {
-        this.log(`ℹ️ Overwriting the contents of ${targetDir}`);
+        this.log(`> Overwriting the contents of ${targetDir}`);
       }
     } catch (error) {
       // If the directory doesn't exist, create it
       if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
         try {
           mkdirSync(targetDir, { recursive: true });
-          this.log(`ℹ️ Created directory ${targetDir}`);
+          this.log(`> Created directory ${targetDir}`);
         } catch (mkdirError) {
           this.error(`❌ Failed to create directory ${targetDir}: ${mkdirError}`);
         }
@@ -88,15 +88,15 @@ export default class Init extends Command {
 
   private async checkVersion(version?: string) {
     if (version) {
-      this.log(`ℹ️ Using version ${version}`);
+      this.log(`> Using version ${version}`);
       return;
     }
 
-    this.log('ℹ️ No version specified. Using latest version');
+    this.log('> No version specified. Using latest version');
   }
 
   private async cloneTemplate(targetDir: string, flags: { force?: boolean; version?: string; }) {
-    this.log('ℹ️ Initializing template -> ' + (flags.version ?? 'latest version'));
+    this.log('> Initializing template -> ' + (flags.version ?? 'latest version'));
     const spinner = createSpinner();
     spinner.start();
 
@@ -124,9 +124,9 @@ export default class Init extends Command {
       isGit = confirm('Do you want to initialize a git repository?');
       isNpm = confirm('Do you want to install dependencies?');
     }
-    
+
     if (flags.git || isGit) {
-      this.log('ℹ️ Initializing git repository');
+      this.log('> Initializing git repository');
       const spinner = createSpinner();
       spinner.start();
       await execa('git', ['init'], { cwd: targetDir });
@@ -135,12 +135,12 @@ export default class Init extends Command {
     }
 
     if (flags.install || isNpm) {
-      this.log('ℹ️ Installing dependencies');
+      this.log('> Installing dependencies');
       const spinner = createSpinner();
       spinner.start();
       await execa('npm', ['install'], { cwd: targetDir });
       spinner.stop();
-      this.log('ℹ️ Dependencies installed');
+      this.log('> Dependencies installed');
     }
 
   }
