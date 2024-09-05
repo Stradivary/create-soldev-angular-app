@@ -1,5 +1,5 @@
 # test
-name: version, tag and github release
+name: 1. version, tag and github release
 
 on:
   push:
@@ -47,18 +47,18 @@ jobs:
       #       git commit -am "chore: update README.md"
       #       git push -u origin ${{ github.ref_name }}
       #     fi
-      # - name: Release Action 
-      #   uses: plutotcool/release@v2.0.0
-      #   with:
-      #     # GitHub Token used to create the release on GitHub and publish on GitHub registry.
-      #     github_token: ${{ secrets.GITHUB_TOKEN }} 
-      #     # Enable or disable publishing to package registries. When set to false, releases are only created on GitHub.
-      #     publish: false
-      #     # Enable or disable pushing changes made by the action.
-      #     push: true
-      #     # User name to use when pushing to GitHub.
-      #     name: ${{ secrets.GH_USERNAME }} # optional, default is github-actions[bot]
-      #     # Email to use when pushing to GitHub.
-      #     email: ${{ secrets.GH_EMAIL }} # optional, default is github-actions[bot]@users.noreply.github.com
+      - name: Release Action 
+        uses: plutotcool/release@v2.0.0
+        with:
+          # GitHub Token used to create the release on GitHub and publish on GitHub registry.
+          github_token: ${{ secrets.GH_TOKEN }} 
+          # Enable or disable publishing to package registries. When set to false, releases are only created on GitHub.
+          publish: false
+          # Enable or disable pushing changes made by the action.
+          push: true
+          # User name to use when pushing to GitHub.
+          name: ${{ secrets.GH_USERNAME }} # optional, default is github-actions[bot]
+          # Email to use when pushing to GitHub.
+          email: ${{ secrets.GH_EMAIL }} # optional, default is github-actions[bot]@users.noreply.github.com
           
  
