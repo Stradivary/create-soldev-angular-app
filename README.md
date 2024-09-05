@@ -20,7 +20,7 @@ $ npm install -g create-soldev-angular-app
 $ create-soldev-angular-app COMMAND
 running command...
 $ create-soldev-angular-app (--version)
-create-soldev-angular-app/0.1.9 linux-x64 node-v20.16.0
+create-soldev-angular-app/0.1.10 linux-x64 node-v20.16.0
 $ create-soldev-angular-app --help [COMMAND]
 USAGE
   $ create-soldev-angular-app COMMAND
@@ -30,7 +30,7 @@ USAGE
 # Commands
 <!-- commands -->
 * [`create-soldev-angular-app help [COMMAND]`](#create-soldev-angular-app-help-command)
-* [`create-soldev-angular-app init [NAME] [DIRECTORY]`](#create-soldev-angular-app-init-name-directory)
+* [`create-soldev-angular-app init [NAME] [PATH]`](#create-soldev-angular-app-init-name-path)
 * [`create-soldev-angular-app list`](#create-soldev-angular-app-list)
 * [`create-soldev-angular-app version`](#create-soldev-angular-app-version)
 
@@ -54,24 +54,23 @@ DESCRIPTION
 
 _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.10/src/commands/help.ts)_
 
-## `create-soldev-angular-app init [NAME] [DIRECTORY]`
+## `create-soldev-angular-app init [NAME] [PATH]`
 
 initialize a new project
 
 ```
 USAGE
-  $ create-soldev-angular-app init [NAME] [DIRECTORY] [-f] [-i] [-g] [-p] [-v <value>]
+  $ create-soldev-angular-app init [NAME] [PATH] [-f] [-i] [-p] [-v <value>]
 
 ARGUMENTS
-  NAME       Name of the project
-  DIRECTORY  [default: .] directory to create the project in
+  NAME  Name of the project
+  PATH  [default: .] directory folder to create the project in
 
 FLAGS
   -f, --force
-  -g, --git              Initialize a git repository
   -i, --interactive      interactive mode
   -p, --npm              Install dependencies
-  -v, --version=<value>  Version of the template
+  -v, --version=<value>  Set version of the template, default to latest
 
 DESCRIPTION
   initialize a new project
@@ -80,7 +79,7 @@ EXAMPLES
   $ create-soldev-angular-app init my-project
 ```
 
-_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.9/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.10/src/commands/init.ts)_
 
 ## `create-soldev-angular-app list`
 
@@ -97,7 +96,7 @@ EXAMPLES
   $ create-soldev-angular-app list
 ```
 
-_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.9/src/commands/list.ts)_
+_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.10/src/commands/list.ts)_
 
 ## `create-soldev-angular-app version`
 
