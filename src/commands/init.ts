@@ -25,7 +25,7 @@ export default class Init extends Command {
 
   static override flags = {
     force: Flags.boolean({ char: 'f' }),
-    intractive: Flags.boolean({ char: 'i', description: "interactive mode" }),
+    interactive: Flags.boolean({ char: 'i', description: "interactive mode" }),
     git: Flags.boolean({ char: 'g', description: 'Initialize a git repository' }),
     npm: Flags.boolean({ char: 'p', description: 'Install dependencies' }),
     name: Flags.string({ char: 'n', description: 'Project Name' }),
@@ -118,8 +118,14 @@ export default class Init extends Command {
     this.log('\n🚀 Happy coding!');
   }
 
-  private async postProcess(targetDir: string, flags: { git?: boolean; install?: boolean; }) {
-    if (flags.git) {
+  private async postProcess(targetDir: string, flags: { git?: boolean; install?: boolean; interactive: boolean; }) {
+    let isGit: boolean = false, isNpm: boolean = false;
+    if (flags.interactive) {
+      isGit = confirm('Do you want to initialize a git repository?');
+      isNpm = confirm('Do you want to install dependencies?');
+    }
+    
+    if (flags.git || isGit) {
       this.log('ℹ️ Initializing git repository');
       const spinner = createSpinner();
       spinner.start();
@@ -128,7 +134,7 @@ export default class Init extends Command {
       this.log('Git repository initialized');
     }
 
-    if (flags.install) {
+    if (flags.install || isNpm) {
       this.log('ℹ️ Installing dependencies');
       const spinner = createSpinner();
       spinner.start();
