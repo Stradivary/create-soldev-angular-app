@@ -15,7 +15,7 @@ export default class Init extends Command {
 
   static override args = {
     name: Args.string({ description: 'Name of the project', required: false }),
-    directory: Args.string({ default: '.', description: 'directory to create the project in', required: false }),
+    path: Args.string({ default: '.', description: 'directory folder to create the project in', required: false }),
   };
 
   static override description = 'initialize a new project';
@@ -27,9 +27,8 @@ export default class Init extends Command {
   static override flags = {
     force: Flags.boolean({ char: 'f' }),
     interactive: Flags.boolean({ char: 'i', description: "interactive mode" }),
-    git: Flags.boolean({ char: 'g', description: 'Initialize a git repository' }),
     npm: Flags.boolean({ char: 'p', description: 'Install dependencies' }),
-    version: Flags.string({ char: 'v', description: 'Version of the template' }),
+    version: Flags.string({ char: 'v', description: 'Set version of the template, default to latest' }),
   };
 
   public async run(): Promise<void> {
@@ -39,7 +38,7 @@ export default class Init extends Command {
       message: 'Enter the project name',
     });
 
-    const targetDir = path.join(args.directory, name);
+    const targetDir = path.join(args.path, name);
 
     this.log(`> creating new project in ${targetDir}`);
 
@@ -119,19 +118,9 @@ export default class Init extends Command {
   }
 
   private async postProcess(targetDir: string, flags: { git?: boolean; install?: boolean; interactive: boolean; }) {
-    let isGit: boolean = false, isNpm: boolean = false;
+    let isNpm: boolean = false;
     if (flags.interactive) {
-      isGit = confirm('Do you want to initialize a git repository?');
       isNpm = confirm('Do you want to install dependencies?');
-    }
-
-    if (flags.git || isGit) {
-      this.log('> Initializing git repository');
-      const spinner = createSpinner();
-      spinner.start();
-      await execa('git', ['init'], { cwd: targetDir });
-      spinner.stop();
-      this.log('Git repository initialized');
     }
 
     if (flags.install || isNpm) {
