@@ -20,7 +20,7 @@ $ npm install -g create-soldev-angular-app
 $ create-soldev-angular-app COMMAND
 running command...
 $ create-soldev-angular-app (--version)
-create-soldev-angular-app/0.1.11 linux-x64 node-v20.16.0
+create-soldev-angular-app/0.1.12 linux-x64 node-v20.16.0
 $ create-soldev-angular-app --help [COMMAND]
 USAGE
   $ create-soldev-angular-app COMMAND
@@ -79,7 +79,7 @@ EXAMPLES
   $ create-soldev-angular-app init my-project
 ```
 
-_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.11/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.12/src/commands/init.ts)_
 
 ## `create-soldev-angular-app list`
 
@@ -96,7 +96,7 @@ EXAMPLES
   $ create-soldev-angular-app list
 ```
 
-_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.11/src/commands/list.ts)_
+_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.12/src/commands/list.ts)_
 
 ## `create-soldev-angular-app version`
 
