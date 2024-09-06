@@ -50,7 +50,7 @@ export default class Init extends Command {
 
     await this.postProcess(targetDir, flags);
 
-    await this.logFinishMessage(targetDir);
+    await this.logFinishMessage(targetDir, flags);
   }
 
 
@@ -109,10 +109,14 @@ export default class Init extends Command {
     });
   }
 
-  private async logFinishMessage(targetDir: string) {
+  private async logFinishMessage(targetDir: string, flags: Record<string, any>) {
     this.log(`\n\n🎉 Congatulations, You're ready to develop`);
     this.log('\n👉 To get started:');
     this.log(`      cd ${targetDir}`);
+    if (!flags.install) {
+      this.log('      npm install');
+    } 
+
     this.log('      npm run dev');
     this.log('\n🚀 Happy coding!');
   }
