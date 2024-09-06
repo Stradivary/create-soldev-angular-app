@@ -12,7 +12,6 @@ const templateRepo = 'Stradivary/angular-boilerplate';
 const mainBranchName = 'main';
 
 export default class Init extends Command {
-
   static override args = {
     name: Args.string({ description: 'Name of the project', required: false }),
     path: Args.string({ default: '.', description: 'directory folder to create the project in', required: false }),
@@ -31,10 +30,11 @@ export default class Init extends Command {
     version: Flags.string({ char: 'v', description: 'Set version of the template, default to latest' }),
   };
 
+  private npmConfirmed = false;
   public async run(): Promise<void> {
     const { args, flags } = await this.parse(Init);
 
-    const name = args.name ?? await input({
+    const name = args.name || await input({
       message: 'Enter the project name',
     });
 
@@ -113,7 +113,7 @@ export default class Init extends Command {
     this.log(`\n\n🎉 Congatulations, You're ready to develop`);
     this.log('\n👉 To get started:');
     this.log(`      cd ${targetDir}`);
-    if (!flags.install) {
+    if (!this.npmConfirmed) {
       this.log('      npm install');
     }
 
@@ -121,22 +121,21 @@ export default class Init extends Command {
     this.log('\n🚀 Happy coding!');
   }
 
-  private async postProcess(targetDir: string, flags: { git?: boolean; install?: boolean; interactive: boolean; }) {
+  private async postProcess(targetDir: string, flags: { git?: boolean; npm?: boolean; interactive: boolean; }) {
     let isNpm: boolean = false;
-    if (flags.interactive) {
-      isNpm = await confirm({
-        message: '\nDo you want to install dependencies?',
-        default: false
-      });
-    }
+    isNpm = flags.npm || await confirm({
+      message: '\nDo you want to install dependencies?',
+      default: false
+    });
 
-    if (flags.install || isNpm) {
+    if (isNpm) {
       this.log('> Installing dependencies');
       const spinner = createSpinner();
       spinner.start();
       await execa('npm', ['install'], { cwd: targetDir });
       spinner.stop();
       this.log('> Dependencies installed');
+      this.npmConfirmed = true
     }
 
   }
