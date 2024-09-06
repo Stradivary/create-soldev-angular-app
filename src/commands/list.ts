@@ -1,4 +1,3 @@
-import { select } from '@inquirer/prompts';
 import { Command } from '@oclif/core';
 
 export default class List extends Command {
@@ -20,11 +19,8 @@ export default class List extends Command {
     const versions = [
       '0.1.0',
     ];
-
-    await select({
-      choices: versions.map(v => ({ title: v, value: v })),
-      message: 'ℹ️ listing template versions from repository [alpha]',
-    });
+    this.log('listing template versions from repository [alpha]')
+    versions.forEach(x => this.log(x))
   }
 
 }

@@ -1,4 +1,4 @@
-import { input } from '@inquirer/prompts';
+import { input, confirm } from '@inquirer/prompts';
 import { Args, Command, Flags } from '@oclif/core';
 import { execa } from 'execa';
 import { createSpinner } from 'nanospinner';
@@ -104,7 +104,7 @@ export default class Init extends Command {
     });
 
     spinner.success({
-      mark: '✔️',
+      mark: '✔️ ',
       text: 'Template initialized',
     });
   }
@@ -115,7 +115,7 @@ export default class Init extends Command {
     this.log(`      cd ${targetDir}`);
     if (!flags.install) {
       this.log('      npm install');
-    } 
+    }
 
     this.log('      npm run dev');
     this.log('\n🚀 Happy coding!');
@@ -124,7 +124,10 @@ export default class Init extends Command {
   private async postProcess(targetDir: string, flags: { git?: boolean; install?: boolean; interactive: boolean; }) {
     let isNpm: boolean = false;
     if (flags.interactive) {
-      isNpm = confirm('Do you want to install dependencies?');
+      isNpm = await confirm({
+        message: '\nDo you want to install dependencies?',
+        default: false
+      });
     }
 
     if (flags.install || isNpm) {
