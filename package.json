@@ -12,6 +12,7 @@
     "@oclif/core": "^4",
     "@oclif/plugin-help": "^6",
     "@oclif/plugin-version": "^2.2.10",
+    "@octokit/rest": "^21.0.2",
     "execa": "^9.3.1",
     "nanospinner": "^1.1.0",
     "ora": "^8.1.0"
