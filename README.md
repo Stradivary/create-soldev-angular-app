@@ -23,7 +23,7 @@ $ npm install -g create-soldev-angular-app
 $ create-soldev-angular-app COMMAND
 running command...
 $ create-soldev-angular-app (--version)
-create-soldev-angular-app/0.1.16 win32-x64 node-v20.16.0
+create-soldev-angular-app/0.1.17 win32-x64 node-v20.16.0
 $ create-soldev-angular-app --help [COMMAND]
 USAGE
   $ create-soldev-angular-app COMMAND
@@ -71,7 +71,7 @@ _See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v6.2.1
 
 ## `create-soldev-angular-app init [NAME] [PATH]`
 
-initialize a new project
+Initialize a new project
 
 ```
 USAGE
@@ -79,22 +79,22 @@ USAGE
 
 ARGUMENTS
   NAME  Name of the project
-  PATH  [default: .] directory folder to create the project in
+  PATH  [default: .] Directory folder to create the project in
 
 FLAGS
-  -f, --force
-  -i, --interactive      interactive mode
-  -p, --npm              Install dependencies
-  -v, --version=<value>  Set version of the template, default to latest
+  -f, --force            Force overwrite if directory is not empty
+  -i, --interactive      Interactive mode
+  -p, --npm              Install dependencies automatically
+  -v, --version=<value>  Set version of the template; defaults to latest
 
 DESCRIPTION
-  initialize a new project
+  Initialize a new project
 
 EXAMPLES
   $ create-soldev-angular-app init my-project
 ```
 
-_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.16/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.17/src/commands/init.ts)_
 
 ## `create-soldev-angular-app list`
 
@@ -114,7 +114,7 @@ EXAMPLES
   $ create-soldev-angular-app list
 ```
 
-_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.16/src/commands/list.ts)_
+_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.17/src/commands/list.ts)_
 
 ## `create-soldev-angular-app version`
 
