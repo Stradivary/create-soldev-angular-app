@@ -1,51 +1,53 @@
 /* eslint-disable camelcase */
-import { Command } from '@oclif/core';
-import { Octokit } from '@octokit/rest';
+import {Command, Flags} from '@oclif/core'
+import {Octokit} from '@octokit/rest'
 
 export default class List extends Command {
-  static override description = 'List template versions from the repository';
+  static override description = 'List template versions from the repository'
 
-  static override examples = ['<%= config.bin %> <%= command.id %>'];
-
-  public async run(): Promise<void> {
-    await this.listVersions();
+  static override examples = ['<%= config.bin %> <%= command.id %>']
+  static override flags = {
+    token: Flags.string({char: 't', description: 'provide token for private repo'}),
   }
 
-  private async listVersions() {
-    const templateRepo = 'Stradivary/angular-boilerplate';
-    const [owner, repo] = templateRepo.split('/');
+  public async run(): Promise<void> {
+    const {flags} = await this.parse(List)
+    await this.listVersions(flags.token)
+  }
 
-    const token = process.env.GITHUB_TOKEN;
+  private async listVersions(tokens?: string) {
+    const templateRepo = 'Stradivary/angular-boilerplate'
+    const [owner, repo] = templateRepo.split('/')
 
-    // if (!token) {
-    //   this.log(
-    //     '⚠️  GITHUB_TOKEN environment variable not set. Proceeding unauthenticated. Rate limits may apply.'
-    //   );
-    // }
+    const token = tokens || process.env.GITHUB_TOKEN
 
-    const octokit = new Octokit(token ? { auth: token } : {});
+    if (!token) {
+      this.log('No token provided. Proceeding unauthenticated.  you can add token by --token flags.')
+    }
+
+    const octokit = new Octokit(token ? {auth: token} : {})
 
     try {
       const response = await octokit.repos.listTags({
         owner,
         per_page: 100,
         repo,
-      });
+      })
 
-      const tags = response.data;
+      const tags = response.data
 
       if (tags.length === 0) {
-        this.log('ℹ️  No tags found in the repository.');
-        return;
+        this.log('ℹ  No tags found in the repository.')
+        return
       }
 
-      const versions = tags.map((tag) => tag.name);
+      const versions = tags.map((tag) => tag.name)
 
-      this.log('ℹ️  Available versions:');
-      this.log(versions.join('\n'));
+      this.log('ℹ  Available versions:')
+      this.log(versions.join('\n'))
     } catch (error: unknown) {
       if (error instanceof Error) {
-        this.error(`Repository not found: ${templateRepo}`);
+        this.error(`Repository not found: ${templateRepo}`)
       }
     }
   }
