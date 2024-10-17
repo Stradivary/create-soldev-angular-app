@@ -17,11 +17,11 @@ export default class List extends Command {
 
     const token = process.env.GITHUB_TOKEN;
 
-    if (!token) {
-      this.log(
-        '⚠️  GITHUB_TOKEN environment variable not set. Proceeding unauthenticated. Rate limits may apply.'
-      );
-    }
+    // if (!token) {
+    //   this.log(
+    //     '⚠️  GITHUB_TOKEN environment variable not set. Proceeding unauthenticated. Rate limits may apply.'
+    //   );
+    // }
 
     const octokit = new Octokit(token ? { auth: token } : {});
 

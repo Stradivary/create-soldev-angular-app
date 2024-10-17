@@ -1,4 +1,4 @@
-import { input, confirm } from '@inquirer/prompts';
+import { confirm, input  } from '@inquirer/prompts';
 import { Args, Command, Flags } from '@oclif/core';
 import { execa } from 'execa';
 import { createSpinner } from 'nanospinner';
@@ -50,7 +50,7 @@ export default class Init extends Command {
 
     await this.postProcess(targetDir, flags);
 
-    await this.logFinishMessage(targetDir, flags);
+    await this.logFinishMessage(targetDir);
   }
 
 
@@ -109,7 +109,7 @@ export default class Init extends Command {
     });
   }
 
-  private async logFinishMessage(targetDir: string, flags: Record<string, any>) {
+  private async logFinishMessage(targetDir: string) {
     this.log(`\n\n🎉 Congatulations, You're ready to develop`);
     this.log('\n👉 To get started:');
     this.log(`      cd ${targetDir}`);
