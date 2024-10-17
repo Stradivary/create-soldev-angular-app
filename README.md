@@ -23,7 +23,7 @@ $ npm install -g create-soldev-angular-app
 $ create-soldev-angular-app COMMAND
 running command...
 $ create-soldev-angular-app (--version)
-create-soldev-angular-app/0.1.15 win32-x64 node-v20.16.0
+create-soldev-angular-app/0.1.16 win32-x64 node-v20.16.0
 $ create-soldev-angular-app --help [COMMAND]
 USAGE
   $ create-soldev-angular-app COMMAND
@@ -94,7 +94,7 @@ EXAMPLES
   $ create-soldev-angular-app init my-project
 ```
 
-_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.15/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.16/src/commands/init.ts)_
 
 ## `create-soldev-angular-app list`
 
@@ -102,7 +102,10 @@ List template versions from the repository
 
 ```
 USAGE
-  $ create-soldev-angular-app list
+  $ create-soldev-angular-app list [-t <value>]
+
+FLAGS
+  -t, --token=<value>  provide token for private repo
 
 DESCRIPTION
   List template versions from the repository
@@ -111,7 +114,7 @@ EXAMPLES
   $ create-soldev-angular-app list
 ```
 
-_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.15/src/commands/list.ts)_
+_See code: [src/commands/list.ts](https://github.com/Stradivary/create-soldev-angular-app/blob/v0.1.16/src/commands/list.ts)_
 
 ## `create-soldev-angular-app version`
 

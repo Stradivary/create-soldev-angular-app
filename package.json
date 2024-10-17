@@ -1,7 +1,7 @@
 {
   "name": "create-soldev-angular-app",
   "description": "Codebase builder for telkomsel angular app",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "author": "stradivary",
   "bin": {
     "create-soldev-angular-app": "./bin/run.js"
