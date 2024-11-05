@@ -29,11 +29,18 @@
     "eslint-config-oclif": "^5",
     "eslint-config-oclif-typescript": "^3",
     "eslint-config-prettier": "^9",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "vite-plugin-eslint": "^1.8.1",
+    "typescript-eslint": "^8.1.0",
     "mocha": "^10",
     "oclif": "^4",
     "shx": "^0.3.3",
     "tsx": "^4.19.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "prettier": "3.3.3",
+    "husky": "^8.0.0"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -70,7 +77,8 @@
     "prepack": "oclif manifest && npm run build",
     "test": "mocha --forbid-only \"test/**/*.test.ts\"",
     "version": "npm run build && oclif readme && git add README.md",
-    "commit": "cz"
+    "commit": "cz",
+    "prepare": "husky install"
   },
   "types": "dist/index.d.ts",
   "packageManager": "pnpm@9.6.0+sha512.38dc6fba8dba35b39340b9700112c2fe1e12f10b17134715a4aa98ccf7bb035e76fd981cf0bb384dfa98f8d6af5481c2bef2f4266a24bfa20c34eb7147ce0b5e",
@@ -78,5 +86,15 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,ts,tsx,css,md}": "prettier --write"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
+
 }

@@ -1,0 +1,6 @@
+coverage
+android
+ios
+vendor
+node_modules
+package.json
